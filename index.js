@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var port = process.env.port || 5000;
 var router = express.Router();
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test')
+mongoose.connect('mongodb://localhost/db_aheerdoctor');
 
 
 var Patient = require('./app/models/patient');
@@ -20,10 +20,12 @@ router.use(function (req, res, next) {
 })
 
 router.get('/', function (req, res) {
-    res.json({ message: 'Hello World! this is testing message' });
+    res.json({ message: 'Hello World! welcome to aheer API, naveedaheer.com' });
 });
 
-router.route('/add-patient').post(function (req, res) {
+router.route('/add-patient')
+
+.post(function (req, res) {
     var patient = new Patient();
     patient.name = req.body.name;
     patient.age = req.body.age
@@ -34,8 +36,17 @@ router.route('/add-patient').post(function (req, res) {
         }
         res.json({message: 'Patient Added Successfully'});
     });
-});
+})
 
+
+.get(function(req, res){
+    Patient.find(function(err, patients){
+        if(err){
+            res.send(err)
+        }
+        res.json(patients);
+    });
+});
 
 app.use('/api', router);
 app.listen(port);
