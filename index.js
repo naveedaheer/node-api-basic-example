@@ -24,7 +24,6 @@ router.get('/', function (req, res) {
 });
 
 router.route('/patients')
-
 .post(function (req, res) {
     var patient = new Patient();
     patient.name = req.body.name;
@@ -37,14 +36,22 @@ router.route('/patients')
         res.json({message: 'Patient Added Successfully'});
     });
 })
-
-
 .get(function(req, res){
     Patient.find(function(err, patients){
         if(err){
             res.send(err)
         }
         res.json(patients);
+    });
+});
+
+router.route('/patients/:patientId')
+.get(function(req, res){
+    Patient.findById(req.params.patientId, function(err, patient){
+        if(err){
+            res.send(err);
+        }
+        res.json(patient);
     });
 });
 
