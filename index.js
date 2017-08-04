@@ -23,7 +23,7 @@ router.get('/', function (req, res) {
     res.json({ message: 'Hello World! welcome to aheer API, naveedaheer.com' });
 });
 
-router.route('/add-patient')
+router.route('/patients')
 
 .post(function (req, res) {
     var patient = new Patient();
