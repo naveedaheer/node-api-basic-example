@@ -5,7 +5,6 @@ var port = process.env.port || 5000;
 var router = express.Router();
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/db_aheerdoctor');
-// mongoose.connect('mongodb://naveedaheer:123456@ds129723.mlab.com:29723/db_naveedaheer')
 
 var Patient = require('./app/models/patient');
 
